@@ -15,7 +15,7 @@ echo   (see /print)
 /equip, /smequip, /eq, /smeq
 /equipoff, /smequipoff, /eqoff, /smeqoff
 Fail(message), /fail   (also see Pass)
-FindBuff(buff [ [, unit], item]), buffed
+FindBuff(buff [ [, unit], ,isMine,item]), buffed  结合Chronometer插件可以传入参数isMine判断buff是否由自己施放 eg: FindBuff('毒蛇钉刺','target',1),同时原本第三位参数item移到第四位了，想要按照原版使用item参数的需要这样传FindBuff('Buffname','unitId',nil,'itemname')
 SpellReady(spell)
 FindItem(item)
 /in seconds[+] command, SM_IN(seconds, command, repeat)

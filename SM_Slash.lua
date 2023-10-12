@@ -430,7 +430,21 @@ function ItemLinkToName(link)
 	end
 end
 
-function FindBuff( obuff, unit, item)
+function IsMyBuff(unitId,name)
+	if not Chronometer then Print('Error: Chronometer not found.') return false end
+	if not UnitExists(unitId) then return false end
+	u = UnitName(unitId)
+	  for i = 1, 20 do
+		  if Chronometer.bars[i].id then
+			  if Chronometer.bars[i].target == u and Chronometer.bars[i].name == name then
+				  return true
+			  end
+		  end
+	  end
+	  return false
+ end
+
+function FindBuff( obuff, unit, isMine, item)
 	local buff=strlower(obuff);
 	local tooltip=SM_Tooltip;
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
@@ -485,7 +499,7 @@ function FindBuff( obuff, unit, item)
 		b = textleft1:GetText();
 		tooltip:Hide();
 		if ( b and strfind(strlower(b), buff) ) then
-			return "buff", i, b;
+			if not isMine then return "buff", i, b; elseif IsMyBuff(unit,obuff) then return "buff", i, b; end
 		elseif ( c==b ) then
 			break;
 		end
@@ -498,7 +512,7 @@ function FindBuff( obuff, unit, item)
 		b = textleft1:GetText();
 		tooltip:Hide();
 		if ( b and strfind(strlower(b), buff) ) then
-			return "debuff", i, b;
+			if not isMine then return "debuff", i, b; elseif IsMyBuff(unit,obuff) then return "debuff", i, b; end
 		elseif ( c==b) then
 			break;
 		end
