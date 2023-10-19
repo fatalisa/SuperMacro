@@ -126,7 +126,7 @@ SilentTypeList = {
 }
 
 LoseControlMap = {
-	['CC'] = CCTypeList,
+	['cc'] = CCTypeList,
 	['root']= RootTypeList,
 	['slow'] = SlowTypeList,
 	['silent'] = SilentTypeList
