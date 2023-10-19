@@ -628,7 +628,7 @@ function FindBuff( obuff, unit, isMine, item)
 	tooltip:Hide();
 end
 
-function CheckCC(param) 
+function CheckDebuff(param) 
 	local tooltip=SM_Tooltip;
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
 
