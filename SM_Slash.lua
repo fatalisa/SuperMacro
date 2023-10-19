@@ -628,8 +628,7 @@ function FindBuff( obuff, unit, isMine, item)
 	tooltip:Hide();
 end
 
-function CheckCC(param) {
-	local buff=strlower(debuff);
+function CheckCC(param) 
 	local tooltip=SM_Tooltip;
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
 
@@ -648,8 +647,7 @@ function CheckCC(param) {
 		--c = b;
 	end
 	tooltip:Hide();
-
-}
+end
 
 function SpellReady(spell)
     local i,a=0
