@@ -628,7 +628,16 @@ function FindBuff( obuff, unit, isMine, item)
 	tooltip:Hide();
 end
 
-function CheckDebuff(param) 
+function CheckDebuff(param,unit) 
+	if ( not unit ) then
+		unit ='player';
+	elseif ( unit == "mouseover" ) then
+		local frame = GetMouseFocus()
+		if ( frame.label and frame.id ) then
+			unit = frame.label .. frame.id
+		end
+	end
+
 	local tooltip=SM_Tooltip;
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
 
