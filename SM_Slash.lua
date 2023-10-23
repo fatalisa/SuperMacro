@@ -635,7 +635,6 @@ function CheckDebuff(param)
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
 
 	local c=nil;
-	-- Print(LoseControlMap[param]['新进包扎'])
 	for i=1, 16 do
 		tooltip:SetOwner(UIParent, "ANCHOR_NONE");
 		tooltip:SetUnitDebuff('player', i);
