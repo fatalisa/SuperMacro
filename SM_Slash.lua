@@ -635,6 +635,7 @@ function CheckDebuff(param)
 	local textleft1=getglobal(tooltip:GetName().."TextLeft1");
 
 	local c=nil;
+	-- Print(LoseControlMap[param]['新进包扎'])
 	for i=1, 16 do
 		tooltip:SetOwner(UIParent, "ANCHOR_NONE");
 		tooltip:SetUnitDebuff('player', i);
@@ -649,6 +650,69 @@ function CheckDebuff(param)
 		--c = b;
 	end
 	tooltip:Hide();
+end
+
+-- Checks whether or not the given unit has more or less power in percent than the given amount
+-- unit: The unit we're checking
+-- bigger: 1 if the percentage needs to be bigger, 0 if it needs to be lower
+-- amount: The required amount
+-- returns: True or false
+function CheckMana(unit, bigger, amount)
+    local powerPercent = 100 / UnitManaMax(unit) * UnitMana(unit);
+    if bigger == 0 then
+        return powerPercent < tonumber(amount);
+    end
+    
+    return powerPercent > tonumber(amount);
+end
+
+-- Checks whether or not the given unit has more or less total power than the given amount
+-- unit: The unit we're checking
+-- bigger: 1 if the raw power needs to be bigger, 0 if it needs to be less
+-- amount: The required amount
+-- returns: True or false
+function CheckManaNumber(unit, bigger, amount)
+    local power = UnitMana(unit);
+    if bigger == 0 then
+        return power < tonumber(amount);
+    end
+    
+    return power > tonumber(amount);
+end
+
+
+function IsNear(n, a, b)
+    local n1,n2 = math.abs(n-a),math.abs(n-b)
+    if n1<n2 and n>b then
+        return true
+    end
+    
+    return nil
+end
+
+
+function IsHarm(unit)
+    if UnitCanAttack('player','target') and not UnitIsDead('target') then return true end
+    return nil
+end
+
+function IsHelp(unit)
+    if not UnitCanAttack('player','target') then return true end
+    return nil
+end
+
+-- Checks whether or not the given unit has more or less hp in percent than the given amount
+-- unit: The unit we're checking
+-- bigger: 1 if the percentage needs to be bigger, 0 if it needs to be lower
+-- amount: The required amount
+-- returns: True or false
+function CheckHp(unit, bigger, amount)
+    local powerPercent = 100 / UnitHealthMax(unit) * UnitHealth(unit);
+    if bigger == 0 then
+        return powerPercent < tonumber(amount);
+    end
+    
+    return powerPercent > tonumber(amount);
 end
 
 function SpellReady(spell)
